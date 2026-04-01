@@ -1,0 +1,142 @@
+#!/bin/bash
+# 🚀 QUICK START GUIDE - AI Log Analyzer with Ollama
+
+echo "
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║     🚀 AI LOG ANALYZER - QUICK START                      ║
+║     Powered by Ollama AI                                  ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+"
+
+echo "📋 PREREQUISITES CHECK"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Check Python
+if python --version &> /dev/null; then
+    echo "✅ Python: $(python --version 2>&1)"
+else
+    echo "❌ Python not found. Install from https://python.org"
+    exit 1
+fi
+
+# Check Node
+if node --version &> /dev/null; then
+    echo "✅ Node.js: $(node --version)"
+else
+    echo "❌ Node.js not found. Install from https://nodejs.org"
+    exit 1
+fi
+
+# Check Ollama
+if ollama --version &> /dev/null; then
+    echo "✅ Ollama: $(ollama --version)"
+else
+    echo "❌ Ollama not found. Install from https://ollama.ai"
+    exit 1
+fi
+
+echo ""
+echo "🤖 AVAILABLE OLLAMA MODELS"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+ollama list 2>/dev/null || echo "⚠️ No models found. Download one:"
+echo "  ollama pull mistral       (4GB, recommended)"
+echo "  ollama pull llama3.2      (2.7GB, fastest)"
+echo "  ollama pull deepseek-r1   (7GB, most accurate)"
+
+echo ""
+echo "⚙️ CONFIGURATION"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ Backend: http://127.0.0.1:8000"
+echo "✅ Frontend: http://localhost:3000"
+echo "✅ Ollama: http://localhost:11434"
+echo "✅ Elasticsearch: https://localhost:9200"
+
+echo ""
+echo "🎯 STARTING APPLICATION"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Opening 3 terminals..."
+echo ""
+
+# Windows batch
+cat > /tmp/start_app.bat << 'EOF'
+@echo off
+REM Terminal 1: Ollama
+start "Ollama Service" ollama serve
+
+timeout /t 3 /nobreak
+
+REM Terminal 2: Backend
+start "Backend API" cmd /k "cd /d D:\OneDrive\Desktop\GitLab\AiLog Analizer && python -m uvicorn ai_engine.api.main:app --reload --host 127.0.0.1 --port 8000"
+
+timeout /t 3 /nobreak
+
+REM Terminal 3: Frontend
+start "Frontend UI" cmd /k "cd /d D:\OneDrive\Desktop\GitLab\AiLog Analizer\frontend && npm start"
+
+echo.
+echo ============================================
+echo Dashboard: http://localhost:3000
+echo ============================================
+pause
+EOF
+
+echo ""
+echo "📊 FIRST USE"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "1. Open: http://localhost:3000"
+echo "2. Click: 'Load Logs' button"
+echo "3. Wait: 30-60 seconds for AI analysis"
+echo "4. See: ERROR logs with Ollama AI insights"
+echo ""
+
+echo "🎓 FEATURES"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✨ Error Collection: Fetches ERROR logs only"
+echo "✨ AI Analysis: Ollama analyzes each error"
+echo "✨ Root Causes: AI detects what caused errors"
+echo "✨ Severity: CRITICAL/HIGH/MEDIUM/LOW classification"
+echo "✨ Recommendations: Step-by-step fix instructions"
+echo "✨ Prevention: Tips to avoid similar errors"
+echo "✨ Summary: Overall statistics and insights"
+echo ""
+
+echo "💡 TIPS"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "• First analysis takes 30-60 seconds (normal)"
+echo "• Use F12 to see browser console logs"
+echo "• Check terminal for backend logs"
+echo "• Press Ctrl+C to stop any service"
+echo ""
+
+echo "📞 QUICK COMMANDS"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Start Ollama:"
+echo "  ollama serve"
+echo ""
+echo "Start Backend:"
+echo "  cd 'D:\\OneDrive\\Desktop\\GitLab\\AiLog Analizer'"
+echo "  python -m uvicorn ai_engine.api.main:app --reload"
+echo ""
+echo "Start Frontend:"
+echo "  cd 'D:\\OneDrive\\Desktop\\GitLab\\AiLog Analizer\\frontend'"
+echo "  npm start"
+echo ""
+
+echo "📚 DOCUMENTATION"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "📖 Complete Guide: OLLAMA_IMPLEMENTATION_COMPLETE.md"
+echo "📖 Summary: IMPLEMENTATION_COMPLETE_SUMMARY.md"
+echo "📖 API Docs: Check ai_engine/api/main.py"
+echo ""
+
+echo "✅ YOU'RE READY TO GO!"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Double-click: START_WITH_OLLAMA.bat"
+echo ""
+echo "Then open: http://localhost:3000"
+echo ""
+
